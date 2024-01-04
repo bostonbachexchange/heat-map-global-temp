@@ -1,8 +1,12 @@
-# Getting Started with Create React App
+# Monthly Global Land-Surface Temperature Visualization
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React application that visualizes monthly global land-surface temperature using D3.js. It fetches data from the [freeCodeCamp Global Temperature dataset](https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json) and presents it in the form of a heatmap. 
 
-## Available Scripts
+## Table of Contents
+[Installation]
+[Usage]
+[Dependencies]
+[License]
 
 In the project directory, you can run:
 
