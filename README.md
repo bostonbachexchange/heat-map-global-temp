@@ -1,19 +1,20 @@
 # Monthly Global Land-Surface Temperature Visualization
 
+(GH-Pages)[https://bostonbachexchange.github.io/heat-map-global-temp/]
+
 This project is a React application that visualizes monthly global land-surface temperature using D3.js. It fetches data from the [freeCodeCamp Global Temperature dataset](https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json) and presents it in the form of a heatmap. 
 
 ## Table of Contents
 [Installation]()
 [Usage]()
 [Dependencies]()
-[License]()
 
 ### Installation
 
 To run this project locally, follow these steps:
 
 1. Clone the repository:
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/bostonbachexchange/heat-map-global-temp.git
 
 2. Change into the project directory:
 cd your-repo
