@@ -2,3 +2,10 @@
   text-align: center;
 }
 
+#tooltip {
+  visibility: hidden;
+}
+
+.cell:hover {
+  fill: black;
+}

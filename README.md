@@ -3,10 +3,10 @@
 This project is a React application that visualizes monthly global land-surface temperature using D3.js. It fetches data from the [freeCodeCamp Global Temperature dataset](https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json) and presents it in the form of a heatmap. 
 
 ## Table of Contents
-[Installation]
-[Usage]
-[Dependencies]
-[License]
+[Installation]()
+[Usage]()
+[Dependencies]()
+[License]()
 
 ### Installation
 
