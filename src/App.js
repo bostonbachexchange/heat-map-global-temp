@@ -5,7 +5,24 @@ import * as d3 from "d3";
 function App() {
   const [data, setData] = useState([]);
   const [baseTemp, setBaseTemp] = useState();
-  const colors = ["SteelBlue","LightSteelBlue", "Orange", "Crimson"]
+  const colors = ["rgb(69, 117, 180)","rgb(116, 173, 209)", "rgb(171, 217, 233)", "rgb(224, 243, 248)", "rgb(255, 255, 191)", "rgb(254, 224, 144)", "rgb(253, 174, 97)", "rgb(244, 109, 67)", "rgb(215, 48, 39)"]
+  const monthsArray = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+const tempRange = [ 3.9, 5, 6.1, 7.2, 8.3, 9.5, 10.6, 11.7, ""]
+
+function getMonthByNumber(monthNumber) {
+  if (monthNumber >= 0 && monthNumber < monthsArray.length) {
+    return monthsArray[monthNumber];
+  } else {
+    return 'Invalid month number';
+  }
+}
+// Example usage:
+const monthNumber = 2; // Replace with the desired month number
+const selectedMonth = getMonthByNumber(monthNumber);
+console.log(`Month ${monthNumber} is ${selectedMonth}`);
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -33,9 +50,10 @@ function App() {
   }, [data]);
 
   const height = 800;
-  const width = 800;
-  const padding = 60;
+  const width = 1400;
+  const padding = 55;
   let variance;
+  let temp;
 
   function drawHeatMap() {
     d3.select("body svg").remove();
@@ -45,6 +63,9 @@ function App() {
     .select('#legendContainer')
     .append("svg")
     .attr("id", "legend")
+    // .style("padding-bottom", "10px")
+    .style("margin-bottom", "100px")
+    // .style("border", "1px solid black")
     .selectAll("g") 
     .data(colors)
     .enter()
@@ -55,15 +76,17 @@ function App() {
     .attr('width', 18)
     .attr('height', 18)
     .attr('fill', (d) => d)
+    .attr("stroke-width", 1)
+    .attr("stroke", 'black')
     .attr("x", 0)
-    .attr("y", (d, i)=> i * 18);
+    .attr("y", (d, i)=> (i * 17));
   
   legend
     .append('text')
     .attr("fill", "black")
     .attr("x", 18) 
-    .attr("y", (d, i)=> i * 18 + 16)
-    .text((d) => d);
+    .attr("y", (d, i)=> i * 17 + 22)
+    .text((d, i) => "- " + tempRange[i]);
 
 
 
@@ -110,14 +133,25 @@ function App() {
       .attr("class", "cell")
       .attr("fill", (d) => {
         variance = d.variance;
-        if (variance <= -2) {
-          return "SteelBlue";
-        } else if (variance <= 0) {
-          return "LightSteelBlue";
-        } else if (variance <= 1) {
-          return "Orange";
+        temp = baseTemp + variance
+        if (temp <= 3.9) {
+          return colors[0];
+        } else if (temp <= 5) {
+          return colors[1];
+        } else if (temp <= 6.1) {
+          return colors[2];
+        } else if (temp <= 7.2) {
+          return colors[3];
+        } else if (temp <= 8.3) {
+          return colors[4];
+        } else if (temp <= 9.5) {
+          return colors[5];
+        } else if (temp <= 10.6) {
+          return colors[6];
+        } else if (temp <= 11.7) {
+          return colors[7];
         } else {
-          return "Crimson";
+          return colors[8];
         }
       })
       .attr("data-year", (d) => d.year)
@@ -127,17 +161,17 @@ function App() {
       .attr(
         "width",
         (width - 2 * padding) /
-          (d3.max(data, (d) => d.year) - d3.min(data, (d) => d.year)),
-      )
+        (d3.max(data, (d) => d.year) - d3.min(data, (d) => d.year)),
+        )
       .attr("x", (d) => xScale(d.year))
       .attr("y", (d) => {
-        console.log(d.month);
         return yScale(new Date(0, d.month - 1, 0, 0, 0, 0, 0));
       })
       .on('mouseover', (event, d)=> {
         tooltip.transition()
           .style('visibility', 'visible')
-        tooltip.text(d.year)
+        // tooltip.text("Year: " + d.year)
+        tooltip.html(d.year + " - " + monthsArray[d.month - 1]  + "℃" + "<br></br>" + "Temp: " + (baseTemp + d.variance) + "℃"+ "<br></br>" + "Variance: " + d.variance )
         tooltip.attr("data-year", d.year)
       })
       .on('mouseout', (event, d)=> {

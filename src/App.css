@@ -1,11 +1,23 @@
+
 .App {
   text-align: center;
 }
 
 #tooltip {
   visibility: hidden;
+  margin-bottom: 0px;
+  height: auto;
+  width: auto;
 }
 
+
 .cell:hover {
-  fill: black;
+  stroke-width: 1;
+  stroke: black;
+}
+  
+
+#container {
+  margin-top: 0px;
+  padding-top: 0px;
 }
