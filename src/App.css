@@ -10,14 +10,22 @@
   width: auto;
 }
 
-
 .cell:hover {
   stroke-width: 1;
   stroke: black;
 }
-  
 
 #container {
   margin-top: 0px;
   padding-top: 0px;
 }
+
+#legandTooltipContainer {
+  display: relative;
+}
+
+#legendContainer {
+  position: absolute;
+  left: 10%;
+}
+

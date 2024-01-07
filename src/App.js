@@ -12,17 +12,8 @@ function App() {
 ];
 const tempRange = [ 3.9, 5, 6.1, 7.2, 8.3, 9.5, 10.6, 11.7, ""]
 
-function getMonthByNumber(monthNumber) {
-  if (monthNumber >= 0 && monthNumber < monthsArray.length) {
-    return monthsArray[monthNumber];
-  } else {
-    return 'Invalid month number';
-  }
-}
-// Example usage:
-const monthNumber = 2; // Replace with the desired month number
-const selectedMonth = getMonthByNumber(monthNumber);
-console.log(`Month ${monthNumber} is ${selectedMonth}`);
+
+
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -49,8 +40,8 @@ console.log(`Month ${monthNumber} is ${selectedMonth}`);
     }
   }, [data]);
 
-  const height = 800;
-  const width = 1400;
+  const height = 500;
+  const width = 1200;
   const padding = 55;
   let variance;
   let temp;
@@ -63,9 +54,7 @@ console.log(`Month ${monthNumber} is ${selectedMonth}`);
     .select('#legendContainer')
     .append("svg")
     .attr("id", "legend")
-    // .style("padding-bottom", "10px")
     .style("margin-bottom", "100px")
-    // .style("border", "1px solid black")
     .selectAll("g") 
     .data(colors)
     .enter()
@@ -104,8 +93,10 @@ console.log(`Month ${monthNumber} is ${selectedMonth}`);
 
     const yAxis = d3.axisLeft(yScale).tickFormat(d3.timeFormat("%B"));
 
+    
+
     const svg = d3
-      .select("body #container")
+      .select(".App #container")
       .append("svg")
       .attr("width", width)
       .attr("height", height);
@@ -170,8 +161,7 @@ console.log(`Month ${monthNumber} is ${selectedMonth}`);
       .on('mouseover', (event, d)=> {
         tooltip.transition()
           .style('visibility', 'visible')
-        // tooltip.text("Year: " + d.year)
-        tooltip.html(d.year + " - " + monthsArray[d.month - 1]  + "℃" + "<br></br>" + "Temp: " + (baseTemp + d.variance) + "℃"+ "<br></br>" + "Variance: " + d.variance )
+        tooltip.html(d.year + " - " + monthsArray[d.month - 1]   + "<br></br>" + "Temp: " + (baseTemp + d.variance) + "℃"+ "<br></br>" + "Variance: " + d.variance + "℃")
         tooltip.attr("data-year", d.year)
       })
       .on('mouseout', (event, d)=> {
@@ -187,9 +177,10 @@ console.log(`Month ${monthNumber} is ${selectedMonth}`);
       <p id="description">
         1753 - 2015: base temperature {baseTemp && baseTemp}℃
       </p>
-      <div id="tooltip"></div>
       <div id="container"></div>
-      <div id="legendContainer">
+      <div id="legandTooltipContainer">
+        <div id="legendContainer"></div>
+        <div id="tooltip"></div>
       </div>
     </div>
   );
